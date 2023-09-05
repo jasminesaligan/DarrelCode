@@ -1,7 +1,10 @@
 public class Exercise {
     public static void main(String[] args) throws Exception {
   
-        char [][] mdArray = {{'P','R','E','Y'}, {'L','A','V', 'A'}, {'O','V','E', 'R'}, {'T', 'E', 'N', 'D'}};
+        char [][] mdArray = {{'P','R','E','Y'}, 
+                            {'L','A','V', 'A'}, 
+                            {'O','V','E', 'R'}, 
+                            {'T', 'E', 'N', 'D'}};
     
   
         // WORD 1
