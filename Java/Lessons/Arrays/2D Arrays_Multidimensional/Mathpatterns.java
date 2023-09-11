@@ -15,13 +15,11 @@ public class Mathpatterns {
             } 
         }
   
-        // PATTERN 1
-        System.out.println(" ");
+        // PATTERN 1 SUM OF ALL NUMBERS
+        System.out.println("\n");
         System.out.println("1. SUM OF PATTERN 1");
         
         for (int row = 0; row < mdArray.length; row++) {
-
-            //System.out.println(" ");
 
             for (int column = 0; column < mdArray.length; column++) {
                 
@@ -31,14 +29,12 @@ public class Mathpatterns {
 
         System.out.println("the sum of the array is: " + sum);
 
-        // PATTERN 2
+        // PATTERN 2 SUM OF ROW 1
         System.out.println("");
         System.out.println("2. SUM OF PATTERN 2");
 
         sum = 0;
         for (int row = 0; row < mdArray.length; row++) {
-
-            //System.out.println(" ");
 
             for (int column = 0; column < mdArray.length; column++) {
                 
@@ -49,14 +45,12 @@ public class Mathpatterns {
         }
         System.out.println("the sum of this pattern 2 is: " + sum);
 
-        // PATTERN 3
+        // PATTERN 3 SUM OF ROW 1 and Column 1
         System.out.println("");
         System.out.println("3. SUM OF PATTERN 3");
 
         sum = 0;
         for (int row = 0; row < mdArray.length; row++) {
-
-            //System.out.println(" ");
 
             for (int column = 0; column < mdArray.length; column++) {
                 
@@ -67,14 +61,12 @@ public class Mathpatterns {
         }
         System.out.println("the sum of this pattern 3 is: " + sum);
         
-        // PATTERN 4
+        // PATTERN 4 SUM of 1 4 13 16
         System.out.println("");
         System.out.println("4. SUM OF PATTERN 4");
 
         sum = 0;
         for (int row = 0; row < mdArray.length; row++) {
-
-            //System.out.println(" ");
 
             for (int column = 0; column < mdArray.length; column++) {
                 
@@ -87,14 +79,12 @@ public class Mathpatterns {
         }
         System.out.println("the sum of this pattern 4 is: " + sum);
         
-        // PATTERN 5
+        // PATTERN 5 SUM of 6 7 10 11
         System.out.println("");
         System.out.println("5. SUM OF PATTERN 5");
 
         sum = 0;
         for (int row = 0; row < mdArray.length; row++) {
-
-            //System.out.println(" ");
 
             for (int column = 0; column < mdArray.length; column++) {
                 
@@ -107,14 +97,12 @@ public class Mathpatterns {
         }
         System.out.println("the sum of this pattern 5 is: " + sum);
       
-        // PATTERN 6
+        // PATTERN 6 SUM of 1 4 6 7 10 11 13 16
         System.out.println("");
         System.out.println("6. SUM OF PATTERN 6");
 
         sum = 0;
         for (int row = 0; row < mdArray.length; row++) {
-
-            //System.out.println(" ");
 
             for (int column = 0; column < mdArray.length; column++) {
                 
