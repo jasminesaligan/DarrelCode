@@ -35,11 +35,15 @@ public class SortedList<Item extends Comparable<Item>> implements Iterable<Item>
     }
     
     public void insertInOrder(Item item) {
-        Node newNode = new Node();
-        newNode.item = item;
+        // Note: assumes list is in order from least to greatest as dictated 
+        // by Item's implementation of Comparable interface
+        //insert code here
+
+        Node temp = new Node();
+        temp.item = item;
 
         if (first == null) {
-            first = newNode;
+            first = temp;
             return;
         }
 
@@ -52,11 +56,11 @@ public class SortedList<Item extends Comparable<Item>> implements Iterable<Item>
         }
 
         if (previous == null){
-            newNode.next = first;
-            first = newNode;
+            temp.next = first;
+            first = temp;
         } else {
-            newNode.next = current;
-            previous.next = newNode;
+            temp.next = current;
+            previous.next = temp;
         }
     }
 

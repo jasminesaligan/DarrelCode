@@ -1,9 +1,11 @@
 class Node {
     public int iData; //data item(key)
     public Node next; // next node in list
+    public int size;
 
     public Node(int id) { //constructor
         iData = id;
+        size = 0;
     }
 }
 
@@ -28,17 +30,23 @@ class LinkList { //class name are connected to constructor, class - class
         }
     }
 
+    
+
     public void insertFirst (int key) { //insert a node at the front of the list
 
-        Node head = new Node(key);
-        head.next = first;
-        first = head;
-        
+        //See Question (a)...
+
+        Node temp = first;
+        first = new Node(key);
+        first.next = temp;
+
 
     }
 
     public Node delete(int key) { //delete the node with a given key
         
+        //See question (b)..
+    
         Node current = first;
         Node previous = null;
 
@@ -47,7 +55,7 @@ class LinkList { //class name are connected to constructor, class - class
         current = current.next;
         }
 
-        if (previous == null) {
+        if (current == null) {
             return null;
         }
 
@@ -67,9 +75,11 @@ class LinkListApp {
 
         LinkList theList = new LinkList(); //create a list
         
-        theList.insertFirst(22);
+        theList.insertFirst(22); //head
         theList.insertFirst(44);
-        theList.insertFirst(66);
+        theList.insertFirst(66); //tail
+        theList.insertFirst(99);
+        theList.insertFirst(77);
         Node d = theList.delete(44);
         d = theList.delete(88);
         theList.displayList(); //display list
