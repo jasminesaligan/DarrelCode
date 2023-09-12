@@ -2,7 +2,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class SortedList<Item extends Comparable<Item>> implements Iterable<Item> {
-    
+    //sort
     private class Node {
         Item item;
         Node next;
