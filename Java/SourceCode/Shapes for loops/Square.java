@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class SALIGAN_POQUIZ_Nested_1 {
+public class Square {
     public static void main(String[] args) throws Exception {
 
     Scanner sc = new Scanner (System.in);

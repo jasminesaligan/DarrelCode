@@ -1,8 +1,10 @@
 import java.util.Scanner;
-public class SALIGAN_POQUIZ_Nested_3 {
+public class InvertedLeftSide {
     public static void main(String[] args) throws Exception {
     Scanner sc = new Scanner (System.in);
     System.out.print("Enter the value: ");
+
+    //inverted left side
     int a = sc.nextInt();
         for (int rows = a; rows >= 1; rows--) {
             System.out.print("\n");
@@ -11,6 +13,5 @@ public class SALIGAN_POQUIZ_Nested_3 {
             }
         }
         sc.close();
-
     }
 }
