@@ -9,14 +9,7 @@
             "name": "App",
             "request": "launch",
             "mainClass": "App",
-            "projectName": "Project Product Catalogue Finals OOP linear_a1455718"
-        },
-        {
-            "type": "java",
-            "name": "App",
-            "request": "launch",
-            "mainClass": "App",
-            "projectName": "Application Finals OOP linear_556af186",
+            "projectName": "Project Product Catalogue Finals OOP_116a778d",
             "vmArgs": "--module-path C:/javafx-sdk-20/lib --add-modules javafx.controls,javafx.fxml"
         },
         {
