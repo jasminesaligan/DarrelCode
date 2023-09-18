@@ -53,5 +53,10 @@
             <Font name="Copperplate" size="15.0" />
          </font>
       </Label>
+      <Button fx:id="createAcc" layoutX="315.0" layoutY="559.0" mnemonicParsing="false" onAction="#createAccount" opacity="0.73" prefHeight="35.0" prefWidth="141.0" style="-fx-background-color: #FFC20B;" text="Create Account">
+         <font>
+            <Font name="Copperplate" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -38,7 +38,7 @@ public class LoginController implements Initializable {
     PasswordField mypasswordfield;
 
     @FXML
-    Button loginbutton;
+    Button loginbutton, createAcc;
 
     @FXML
     Label mywarninglabel;
@@ -172,6 +172,17 @@ public class LoginController implements Initializable {
         } else {
             mywarninglabel.setVisible(true);
         }
+    }
+
+    public void createAccount(ActionEvent event) throws IOException {
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/signup.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 
    
