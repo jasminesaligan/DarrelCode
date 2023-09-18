@@ -18,7 +18,7 @@ public class App extends Application {
             
             Image image = new Image("/images/logo.jpg");
 
-            Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/signup.fxml"));
             Scene scene = new Scene(root);
 
             stage.setTitle("Paint Like Van Gogh");

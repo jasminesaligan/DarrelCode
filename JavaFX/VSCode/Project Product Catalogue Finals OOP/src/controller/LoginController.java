@@ -20,6 +20,7 @@ import model.Receipt;
 import model.AcrylicPaint;
 import model.RoundBrush;
 import model.SketchPad;
+import model.UserAccount;
 import model.CanvasPaper;
 import model.Watercolor;
 import model.WatercolorPaper;
@@ -156,7 +157,10 @@ public class LoginController implements Initializable {
         String username = mytextfield.getText();
         String password = mypasswordfield.getText();
 
-        if (username.equals("a") && password.equals("a")) {
+        LinkList accounts = DataManager.getAccounts();
+        UserAccount signedUser = accounts.find(username, password);
+
+        if (signedUser != null) {
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomePage.fxml"));
