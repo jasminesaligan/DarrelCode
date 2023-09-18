@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -49,6 +50,8 @@ public class SignUpController {
         UserAccount newUser = new UserAccount(mytextfield.getText(), password.getText());
         DataManager.getAccounts().insertFirst(newUser);
         
+        LinkList accounts = DataManager.getAccounts();
+        accounts.printAccounts();
 
     }
 }

@@ -30,9 +30,14 @@ class LinkList { //class name are connected to constructor, class - class
         return null;
     }
 
-      public void displayList(){ //display the list
-        for  (Node current = first; current != null; current = current.next) {
-            System.out.println(current.data);
+    public void printAccounts() {
+        Node current = first;
+        while (current != null) {
+            UserAccount account = current.data;
+            System.out.println("Username: " + account.getUsername());
+            System.out.println("Password: " + account.getPassword());
+            System.out.println("-----------------------------");
+            current = current.next;
         }
     }
 
