@@ -25,8 +25,6 @@ public class HomePageController {
 
   private Stage stage;
 
-  @FXML
-  CartController cartController = null;
   
 
     
