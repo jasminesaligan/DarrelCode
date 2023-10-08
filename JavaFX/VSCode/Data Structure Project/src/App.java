@@ -1,3 +1,6 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +16,8 @@ public class App extends Application {
     }
 
     public void start(Stage stage) throws Exception {
+
+        DBConnect();
 
         try {
             
@@ -30,6 +35,16 @@ public class App extends Application {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void DBConnect(){
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/momentum", "root", "");
+            System.out.println("connected na yung database");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
