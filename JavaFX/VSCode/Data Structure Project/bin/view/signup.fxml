@@ -15,12 +15,13 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="mytextfield" layoutX="406.0" layoutY="270.0" prefHeight="42.0" prefWidth="327.0" promptText="username" />
+      <TextField fx:id="username" layoutX="406.0" layoutY="270.0" prefHeight="42.0" prefWidth="327.0" promptText="username" />
       <Label layoutX="280.0" layoutY="257.0" prefHeight="68.0" prefWidth="139.0" text="Username:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="signupbutton" layoutX="523.0" layoutY="408.0" mnemonicParsing="false" onAction="#signup" prefHeight="58.0" prefWidth="94.0" text="Signup" />
+      <Button fx:id="signupButton" layoutX="523.0" layoutY="408.0" mnemonicParsing="false" onAction="#signup" prefHeight="58.0" prefWidth="94.0" text="Signup" />
+      <Label fx:id="label1" layoutX="523.0" layoutY="474.0" prefHeight="58.0" prefWidth="110.0" text="Stored and Signed!" visible="false" />
    </children>
 </AnchorPane>
