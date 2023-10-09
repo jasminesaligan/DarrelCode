@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -44,6 +42,8 @@ public class SignUpController {
 
     Statement statement;
 
+    
+
     public void setStatement(Statement statement) {
         this.statement = statement;
     }
@@ -71,15 +71,14 @@ public class SignUpController {
     public void insertDB(){
 
         
-
         try {
             String insertAccount = "INSERT INTO `account` (`Username`, `Password`) VALUES ('"+ username.getText() +"', '"+ password.getText()+"')";
-            
             statement.executeUpdate(insertAccount);            
             System.out.println("Inserted Account");
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.getMessage();
+            System.out.println("Username or Password is taken");
         }
     }
     
