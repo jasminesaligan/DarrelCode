@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javafx.event.ActionEvent;
@@ -22,7 +23,7 @@ import javafx.scene.Node;
 public class SignUpController {
     
     @FXML
-    TextField username;
+    TextField username, checkAcc;
 
     @FXML
     PasswordField password;
@@ -37,7 +38,7 @@ public class SignUpController {
     FXMLLoader loader;
 
     @FXML
-    Label label1;
+    Label label1, userlabel, passlabel;
 
     private Stage stage;
 
@@ -61,6 +62,12 @@ public class SignUpController {
 
     }
 
+    public void search(ActionEvent event)throws IOException{
+
+        view();
+
+    }
+
     public void insertDB(){
         try {
             String insertAccount = "INSERT INTO `account` (`Username`, `Password`) VALUES ('"+ username.getText() +"', '"+ password.getText()+"')";
@@ -69,6 +76,23 @@ public class SignUpController {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+    
+
+    public void view(){
+        try {
+            String viewAccount = "select * from account where Username = '" + checkAcc.getText()+"'";
+            ResultSet result = statement.executeQuery(viewAccount);
+            if(result.next()){
+                userlabel.setVisible(true);
+                userlabel.setText("Username: " + result.getString(2));
+                passlabel.setText("Password: " + result.getString(3));
+                passlabel.setVisible(true);
+            }
+
+        } catch (Exception e) {
+            System.out.println("bro account not found");
         }
     }
     
