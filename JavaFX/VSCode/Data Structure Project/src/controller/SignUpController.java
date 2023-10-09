@@ -69,8 +69,12 @@ public class SignUpController {
     }
 
     public void insertDB(){
+
+        
+
         try {
             String insertAccount = "INSERT INTO `account` (`Username`, `Password`) VALUES ('"+ username.getText() +"', '"+ password.getText()+"')";
+            
             statement.executeUpdate(insertAccount);            
             System.out.println("Inserted Account");
 
