@@ -71,14 +71,14 @@ public class SignUpController {
     public void insertDB(){
 
         
+
         try {
             String insertAccount = "INSERT INTO `account` (`Username`, `Password`) VALUES ('"+ username.getText() +"', '"+ password.getText()+"')";
             statement.executeUpdate(insertAccount);            
             System.out.println("Inserted Account");
 
         } catch (Exception e) {
-            e.getMessage();
-            System.out.println("Username or Password is taken");
+            System.out.println(e.getMessage());
         }
     }
     
