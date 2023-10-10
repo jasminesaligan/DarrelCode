@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javafx.event.ActionEvent;
@@ -53,12 +54,7 @@ public class SignUpController {
         insertDB();
         label1.setVisible(true);
 
-        // stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
-        // FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
-        // Parent root = loader.load();
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
+        
 
     }
 
@@ -97,6 +93,29 @@ public class SignUpController {
         }
     }
     
+    //initial login pa lng to..aayusin pa 
+    public void CheckLogin(ActionEvent event) throws SQLException, IOException{
+        try {
+            String selectAccount = "select Username, Password from account where Username = '" + username.getText() + "' and password = '" + password.getText() + "'";
+            ResultSet result = statement.executeQuery(selectAccount);
+
+            if (result.next()) {
+                stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+            
+            
+        } catch (Exception e) {
+            System.out.println("Wrong username or password");
+        }
+        
+
+
+    }
 
 }
 
