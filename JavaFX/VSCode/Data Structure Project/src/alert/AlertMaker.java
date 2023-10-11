@@ -16,18 +16,18 @@ public class AlertMaker {
 
     public static void showErrorAlert(String title, String content) {
         Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(title);
-        alert.setContentText(content);
+        alert.setTitle(title);
+        alert.setHeaderText(content);
+        //alert.setContentText(content);
 
         alert.showAndWait();
     }
 
     public static void showSuccessfulAlert(String title, String content) {
         Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Successful");
-        alert.setHeaderText(title);
-        // alert.setContentText(content);
+        alert.setTitle(title);
+        alert.setHeaderText(content);
+        //alert.setContentText(content);
         alert.showAndWait();
     }
 

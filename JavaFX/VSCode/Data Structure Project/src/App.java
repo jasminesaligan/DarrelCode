@@ -2,8 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-
-import controller.SignUpController;
+import controller.SignInController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 
 public class App extends Application {
 
@@ -25,26 +25,25 @@ public class App extends Application {
     private PasswordField password;
 
     public static void main(String[] args) {
-
         launch(args);
     }
 
     public void start(Stage stage) throws Exception {
 
-        DBConnect();
-
         try {
-            
+
+            DBConnect();
+
             //Image image = new Image("/images/logo.jpg");
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/signup.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SignIn.fxml"));
             Parent root = loader.load();
-            SignUpController signUpController = loader.getController();
-            signUpController.setStatement(statement);
+            SignInController signInController = loader.getController();
+            signInController.setStatement(statement);
             
             Scene scene = new Scene(root);
 
-            stage.setTitle("Paint Like Van Gogh");
+            stage.setTitle("Momentum");
 
             //stage.getIcons().add(image);
             
@@ -66,6 +65,8 @@ public class App extends Application {
             System.out.println(e.getMessage());
         }
     }
+
+    
 
     
 

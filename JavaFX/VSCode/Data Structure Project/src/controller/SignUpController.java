@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import alert.AlertMaker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,7 +53,7 @@ public class SignUpController {
     public void signup(ActionEvent event)throws IOException{
 
         insertDB();
-        label1.setVisible(true);
+        // label1.setVisible(true);
 
         
 
@@ -73,6 +74,7 @@ public class SignUpController {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            AlertMaker.showSimpleAlert("WHOOOAAAA", "Username or Password is taken");
         }
     }
     
@@ -99,18 +101,27 @@ public class SignUpController {
             String selectAccount = "select Username, Password from account where Username = '" + username.getText() + "' and password = '" + password.getText() + "'";
             ResultSet result = statement.executeQuery(selectAccount);
 
-            if (result.next()) {
+            if (username.getText().isEmpty() || password.getText().isEmpty()) {
+                AlertMaker.showErrorAlert("NOOOOOOOO", "whoaoaa");
+            } else {
+
+                if (result.next()) {
+
                 stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
+
+                } else {
+                    AlertMaker.showErrorAlert("whoaaa", "Wrong password or username");
+                }
+
             }
             
-            
         } catch (Exception e) {
-            System.out.println("Wrong username or password");
+            e.getMessage();
         }
         
 
