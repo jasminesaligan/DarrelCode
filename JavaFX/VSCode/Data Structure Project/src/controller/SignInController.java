@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,7 +26,7 @@ import javafx.stage.Stage;
 import model.DataStored;
 
 
-public class SignInController{
+public class SignInController implements Initializable{
     
     @FXML
     TextField loginUsername, InsertUsername;
@@ -42,15 +43,15 @@ public class SignInController{
     @FXML
     Hyperlink goToSignup, goToLogin;
 
+    @FXML
+    FXMLLoader loader;
+
     Statement statement;
 
 
 
     public void signup(ActionEvent event)throws IOException{
-
         insertDB();
-
-
     }
 
 
@@ -63,14 +64,14 @@ public class SignInController{
 
     public void insertDB(){
         String insertAccount = "INSERT INTO `account` (`Username`, `Password`) VALUES ('"+ InsertUsername.getText() +"', '"+ InsertPassword.getText()+"')";
-
+        
         try {
             if (InsertUsername.getText().isEmpty() || InsertPassword.getText().isEmpty()) {
                 AlertMaker.showErrorAlert("Error", "Account cannot be blanked!");
+                
             } else {
                 String checkUsername = "select Username from account where Username = '" + InsertUsername.getText() + "'";
                 ResultSet result = statement.executeQuery(checkUsername);
-
                 if (result.next()) {
                     AlertMaker.showErrorAlert("Notification!", "Username taken");
                 } else {
@@ -83,18 +84,18 @@ public class SignInController{
             }
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             AlertMaker.showSimpleAlert("Notification!", "Error");
-      
+            
         }
 
     }
 
     public void CheckLogin(ActionEvent event) throws SQLException, IOException{
-        String selectAccount = "select Username, Password from account where Username = '" + loginUsername.getText() + "' and password = '" + loginPassword.getText() + "'";
+
+        String selectAccount = "SELECT Username, Password from `account` where Username = '" + loginUsername.getText() + "' and password = '" + loginPassword.getText() + "'";
 
         try {
-            
             ResultSet result = statement.executeQuery(selectAccount);
 
             if (loginUsername.getText().isEmpty() || loginPassword.getText().isEmpty()) {
@@ -102,15 +103,20 @@ public class SignInController{
             } else {
 
                 if (result.next()) {
+                    String logUsername = result.getString(1);
+                    String logPassword = result.getString(2);
 
-                DataStored.username = loginUsername.getText();
+                    DataStored.username = loginUsername.getText();
 
-                Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomePage.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+                    if (logUsername.equals(loginUsername.getText()) && logPassword.equals(loginPassword.getText())) {
+
+                        Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomePage.fxml"));
+                        Parent root = loader.load();
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                    }
 
                 } else {
                     AlertMaker.showErrorAlert("Notification!", "Wrong password or username");
@@ -119,7 +125,7 @@ public class SignInController{
             }
             
         } catch (Exception e) {
-            e.getMessage();
+            e.printStackTrace();
         }
         
     }
@@ -156,6 +162,19 @@ public class SignInController{
     }
 
 
+
+    //we have to initialize the database always
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/momentum", "root", "");
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
 

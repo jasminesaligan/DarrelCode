@@ -3,6 +3,10 @@ package controller;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,8 +29,18 @@ public class HomePageController implements Initializable {
     @FXML
     Label displayUsername;
 
+    Statement statement;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/momentum", "root", "");
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         displayuser();
     }
 
@@ -41,13 +55,9 @@ public class HomePageController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
 
-
         DataStored.clearUsername();
 
-        
         stage.show();
-
-        
 
 
     }

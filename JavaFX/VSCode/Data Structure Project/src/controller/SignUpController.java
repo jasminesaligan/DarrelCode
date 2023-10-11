@@ -128,6 +128,10 @@ public class SignUpController {
 
     }
 
+    public Object getConnection() {
+        return null;
+    }
+
 }
 
 
