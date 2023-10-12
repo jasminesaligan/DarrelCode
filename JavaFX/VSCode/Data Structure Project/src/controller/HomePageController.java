@@ -3,10 +3,6 @@ package controller;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,22 +25,28 @@ public class HomePageController implements Initializable {
     @FXML
     Label displayUsername;
 
-    Statement statement;
 
+    //ready for designing
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/momentum", "root", "");
-            statement = connection.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         displayuser();
+
+
     }
 
-    //after log out..di na ulit makapag sign in
+    //----------------------------METHODS for display------------------------------------------
+    
+    public void displayuser(){
+        String user = DataStored.username;
+        displayUsername.setText(user.substring(0, 1).toUpperCase() + user.substring(1));
+        
+    }
+
+
+
+    //----------------------------Methods for buttons------------------------------------
+
     public void logout(ActionEvent event)throws IOException{
 
         System.out.println("Logout method called");
@@ -59,17 +61,10 @@ public class HomePageController implements Initializable {
 
         stage.show();
 
-
     }
 
 
-    //----------------------------METHODS------------------------------------------
     
-    public void displayuser(){
-        String user = DataStored.username;
-        displayUsername.setText(user.substring(0, 1).toUpperCase() + user.substring(1));
-        
-    }
 
 
 }

@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.DataStored;
+import model.Database;
 
 
 public class SignInController implements Initializable{
@@ -47,10 +48,11 @@ public class SignInController implements Initializable{
     FXMLLoader loader;
 
     Statement statement;
+    Connection connect;
 
 
 
-    public void signup(ActionEvent event)throws IOException{
+    public void signup(ActionEvent event)throws IOException, SQLException{
         insertDB();
     }
 
@@ -62,16 +64,21 @@ public class SignInController implements Initializable{
     // }
 
 
-    public void insertDB(){
+    public void insertDB() throws SQLException{
         String insertAccount = "INSERT INTO `account` (`Username`, `Password`) VALUES ('"+ InsertUsername.getText() +"', '"+ InsertPassword.getText()+"')";
         
+        connect = Database.DBConnect();
+        statement = connect.createStatement();
+
         try {
             if (InsertUsername.getText().isEmpty() || InsertPassword.getText().isEmpty()) {
                 AlertMaker.showErrorAlert("Error", "Account cannot be blanked!");
                 
             } else {
+
                 String checkUsername = "select Username from account where Username = '" + InsertUsername.getText() + "'";
                 ResultSet result = statement.executeQuery(checkUsername);
+
                 if (result.next()) {
                     AlertMaker.showErrorAlert("Notification!", "Username taken");
                 } else {
@@ -92,8 +99,11 @@ public class SignInController implements Initializable{
     }
 
     public void CheckLogin(ActionEvent event) throws SQLException, IOException{
-
+        
         String selectAccount = "SELECT Username, Password from `account` where Username = '" + loginUsername.getText() + "' and password = '" + loginPassword.getText() + "'";
+        
+        connect = Database.DBConnect();
+        statement = connect.createStatement();
 
         try {
             ResultSet result = statement.executeQuery(selectAccount);
@@ -117,7 +127,6 @@ public class SignInController implements Initializable{
                         stage.setScene(scene);
                         stage.show();
                     }
-
                 } else {
                     AlertMaker.showErrorAlert("Notification!", "Wrong password or username");
                 }
@@ -157,22 +166,14 @@ public class SignInController implements Initializable{
     //     }
     // }
 
-    public void setStatement(Statement statement) {
-        this.statement = statement;
-    }
 
 
 
-    //we have to initialize the database always
+
+    //ready for designing
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/momentum", "root", "");
-            statement = connection.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
     }
 
