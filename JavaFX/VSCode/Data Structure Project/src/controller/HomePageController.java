@@ -2,7 +2,16 @@ package controller;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
+
+import com.mysql.cj.xdevapi.Result;
+
+import alert.AlertMaker;
+
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,37 +20,72 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import model.DataStored;
+import model.Database;
 
 public class HomePageController implements Initializable {
 
 
     @FXML
-    Button logoutButton;
+    Button logoutButton, taskButton;
 
     @FXML
     Label displayUsername;
+
+    @FXML
+    TextArea task_Input;
+
+    
+
+    Statement statement;
+    Connection connect;
 
 
     //ready for designing
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        displayuser();
+        displayUser();
 
 
     }
 
     //----------------------------METHODS for display------------------------------------------
     
-    public void displayuser(){
+    public void displayUser(){
+        //display user
         String user = DataStored.username;
         displayUsername.setText(user.substring(0, 1).toUpperCase() + user.substring(1));
         
     }
+
+    //it worked but how? also ask carlo kung ganon ba tlaga yung input sa xampp and how to display it
+    public void toAdmin()throws SQLException{
+
+        connect = Database.DBConnect();
+        statement = connect.createStatement();
+
+        String task = "SELECT Task FROM usertask WHERE Task = '" + task_Input.getText() + "'";
+        
+        ResultSet result = statement.executeQuery(task);
+        
+        if (result.next()) {
+            AlertMaker.showSimpleAlert("Notifications", "Task is already existing");
+        } else {
+            String insertTask = "INSERT INTO usertask (Task, Admin) VALUES ('" + task_Input.getText() + "', '" +  DataStored.username + "')";
+            statement.executeUpdate(insertTask);
+        
+        }
+
+    }
+
+
+    
 
 
 

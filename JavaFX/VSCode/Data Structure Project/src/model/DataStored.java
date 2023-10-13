@@ -7,4 +7,7 @@ public class DataStored {
     public static void clearUsername(){
         username = null;
     }
+
+    
 }
+
