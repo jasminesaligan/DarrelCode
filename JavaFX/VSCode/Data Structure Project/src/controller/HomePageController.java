@@ -3,8 +3,6 @@ package controller;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-import com.mysql.cj.xdevapi.Result;
-
 import alert.AlertMaker;
 
 import java.net.URL;
@@ -13,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,13 +20,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.DataStored;
 import model.Database;
+import model.UserTask;
 
 public class HomePageController implements Initializable {
 
@@ -40,6 +43,14 @@ public class HomePageController implements Initializable {
     @FXML
     TextArea task_Input;
 
+    @FXML
+    TableView<UserTask> displayTaskTable;
+
+    @FXML
+    TableColumn<UserTask, String> userTaskList;
+
+    ObservableList<UserTask> TaskList;
+
     
 
     Statement statement;
@@ -51,6 +62,12 @@ public class HomePageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         displayUser();
+        
+        try {
+            showTaskList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -64,8 +81,21 @@ public class HomePageController implements Initializable {
         
     }
 
-    //it worked but how? also ask carlo kung ganon ba tlaga yung input sa xampp and how to display it
-    public void toAdmin()throws SQLException{
+    
+    public void showTaskList() throws SQLException{
+        TaskList = dataTaskList();
+
+        userTaskList.setCellValueFactory(new PropertyValueFactory<UserTask, String>("Task"));
+        displayTaskTable.setItems(TaskList);
+
+    
+    }
+
+    //---------------------------------------------------------------------------------------
+
+
+    //gumana na..pwede na ulit mag input si user paulit ulit
+    public void insertTask()throws SQLException{
 
         connect = Database.DBConnect();
         statement = connect.createStatement();
@@ -84,10 +114,32 @@ public class HomePageController implements Initializable {
 
     }
 
-
+    //Retrieval of data from xampp
+    public ObservableList<UserTask> dataTaskList() throws SQLException{
+        ObservableList<UserTask> DataList = FXCollections.observableArrayList();
     
+        String retrieveData = "SELECT * FROM usertask WHERE Admin = '" + DataStored.username + "'";
+        connect = Database.DBConnect();
+        statement = connect.createStatement();
 
+        try {
+            ResultSet result = statement.executeQuery(retrieveData);
 
+            UserTask UT;
+
+            while (result.next()) {
+                UT = new UserTask(result.getString("Task"));
+
+                DataList.add(UT);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return DataList;
+
+    }
 
     //----------------------------Methods for buttons------------------------------------
 

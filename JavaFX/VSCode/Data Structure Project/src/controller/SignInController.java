@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -57,13 +56,9 @@ public class SignInController implements Initializable{
     }
 
 
-    // public void search(ActionEvent event)throws IOException{
+  
 
-    //     view();
-
-    // }
-
-
+    //Insert username and password to database, basically signup feature
     public void insertDB() throws SQLException{
         String insertAccount = "INSERT INTO `account` (`Username`, `Password`) VALUES ('"+ InsertUsername.getText() +"', '"+ InsertPassword.getText()+"')";
         
@@ -98,6 +93,9 @@ public class SignInController implements Initializable{
 
     }
 
+
+
+    //Login Feature..chinecheck muna kung yung account is existing na
     public void CheckLogin(ActionEvent event) throws SQLException, IOException{
         
         String selectAccount = "SELECT Username, Password from `account` where Username = '" + loginUsername.getText() + "' and password = '" + loginPassword.getText() + "'";
@@ -139,6 +137,7 @@ public class SignInController implements Initializable{
         
     }
 
+    //switch pane of login and signup
     public void switchPane(ActionEvent event){
     
         if (event.getSource() == goToSignup) {
@@ -149,26 +148,6 @@ public class SignInController implements Initializable{
             loginPane.setVisible(true);
         }
     }
-
-    // public void view(){
-    //     try {
-    //         String viewAccount = "select * from account where Username = '" + checkAcc.getText()+"'";
-    //         ResultSet result = statement.executeQuery(viewAccount);
-    //         if(result.next()){
-    //             userlabel.setVisible(true);
-    //             userlabel.setText("Username: " + result.getString(2));
-    //             passlabel.setText("Password: " + result.getString(3));
-    //             passlabel.setVisible(true);
-    //         }
-
-    //     } catch (Exception e) {
-    //         System.out.println("bro account not found");
-    //     }
-    // }
-
-
-
-
 
     //ready for designing
     @Override
